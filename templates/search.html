@@ -1,0 +1,50 @@
+{% include 'header.html' %}
+
+<body>
+
+  <div class="container">
+    <form action="{{ url_for('get_data') }}" method="post">
+      <div class="mb-3">
+        <label for="patientName" class="form-label">Patient First Name</label>
+        <input type="text" name="patient" class="form-control" id="patientName">
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+
+  <div class="container">
+    {% if df_dict: %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Patient ID</th>
+          <th scope="col">Patient First Name</th>
+          <th scope="col">Patient Last Name</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Most Recent Test Date</th>
+          <th scope="col">Test Name</th>
+          <th scope="col">Most Recent Lab Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in df_dict %}
+
+        <tr>
+          <th scope="row">{{ row['PatientID'] }}</th>
+          <td>{{ row['PatientFirstName'] }}</td>
+          <td>{{ row['PatientLastName'] }}</td>
+          <td>{{ row['Gender'] }}</td>
+          <td>{{ row['MostRecentTestDate'] }}</td>
+          <td>{{ row['TestName'] }}</td>
+          <td>{{ row['MostRecentLabResult'] }}</td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+
+</body>
+
+</html>
